@@ -10,16 +10,19 @@ package Abstract;
  * @author minhdq
  */
 interface ChauA {
-
     void daVang();
 }
-
 interface ChauAU {
 
     void daTrang();
 }
+class poly{
+    void in(){
+        System.out.println("Sinh viên");
+    }
+}
 
-class banOanh implements ChauA, ChauAU {
+class banHuong extends poly implements ChauA, ChauAU {
 
     @Override
     public void daVang() {

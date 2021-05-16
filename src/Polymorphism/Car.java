@@ -5,24 +5,39 @@
  */
 package Polymorphism;
 
+import javax.imageio.plugins.bmp.BMPImageWriteParam;
+
 /**
  *
  * @author minhdq
  */
 public class Car {
+    private String _phanKhuc;
     void run(){
         System.out.println("Chạy");
     }
 }
+class BMW extends Car{
+    
+}
 class Toyota extends Car{
+    
     @Override
     void run(){
-        System.out.println("Chạy ở VN");
+        System.out.println("Chạy Toyota ở VN");
+}
+    void chay(){
+        System.out.println("Chạy bộ đấy làm sao ?");
     }
     
     public static void main(String[] args) {
-        Car oto = new Toyota();
+        Car oto;
+        oto = new Toyota();
         oto.run();
+        
+        oto = new BMW();
+        oto.run();
+        
     }
 }
 
