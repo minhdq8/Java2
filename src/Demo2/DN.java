@@ -5,7 +5,7 @@
  */
 package Demo2;
 
-import com.sun.source.doctree.SinceTree;
+
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -185,6 +185,7 @@ public final class DN extends javax.swing.JFrame {
         listSV.add(new SinhVien("111", "123","IT16303"));
         listSV.add(new SinhVien("222", "123","IT16303"));
         listSV.add(new SinhVien("333", "123","IT16303"));
+        //
     }
 
     public void clearForm() {
