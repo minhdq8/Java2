@@ -12,7 +12,9 @@ package Demo3;
 public class LienQuan extends javax.swing.JFrame {
 
     /**
-     * Creates new form LienQuan
+     * 1. title MinhDQ8_FpolyHN
+     * 2. check trùng acc
+     * 3. checkbox ko bắt buộc
      */
     public LienQuan() {
         initComponents();
@@ -43,6 +45,7 @@ public class LienQuan extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("MinhDQ8_FpolyHN");
 
         jLabel1.setText("Liên Quân");
 
