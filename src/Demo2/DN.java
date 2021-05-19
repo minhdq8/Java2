@@ -5,9 +5,9 @@
  */
 package Demo2;
 
-
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,9 +25,11 @@ public final class DN extends javax.swing.JFrame {
         setLocationRelativeTo(null);// show form ra giữa màn hình
         setResizable(false);// ko cho thay đổi kích cỡ form
         loadData();
-        for (SinhVien xxx : listSV) cbbSinhVien.addItem(xxx.getUserName());
+        cbbSinhVien.removeAllItems();// xóa dữ liệu cũ trên cbb
+        for (SinhVien xxx : listSV) {
+            cbbSinhVien.addItem(xxx.getUserName());
+        }
 
-        
     }
 
     /**
@@ -52,6 +54,10 @@ public final class DN extends javax.swing.JFrame {
         btnShow = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
         lbShowPass = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbShowAcc = new javax.swing.JTable();
+        btFillTable = new javax.swing.JButton();
+        cbbLuuThongTin = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,6 +91,17 @@ public final class DN extends javax.swing.JFrame {
 
         jLabel3.setText("Password: ");
 
+        cbbSinhVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbbSinhVienMouseClicked(evt);
+            }
+        });
+        cbbSinhVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbSinhVienActionPerformed(evt);
+            }
+        });
+
         btnShow.setText("Show");
         btnShow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +110,30 @@ public final class DN extends javax.swing.JFrame {
         });
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
+
+        tbShowAcc.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "User", "Pass"
+            }
+        ));
+        jScrollPane1.setViewportView(tbShowAcc);
+
+        btFillTable.setText("Fill");
+        btFillTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btFillTableActionPerformed(evt);
+            }
+        });
+
+        cbbLuuThongTin.setText("Lưu thông tin");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -108,13 +149,15 @@ public final class DN extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tfUserName)
-                            .addComponent(tfPassWord, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)))
+                            .addComponent(tfPassWord, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(cbbLuuThongTin))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(164, 164, 164)
                         .addComponent(lbDangNhap))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(cbbSinhVien, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
@@ -125,11 +168,14 @@ public final class DN extends javax.swing.JFrame {
                                 .addComponent(btn_DangNhap)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_LamMoi)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_SieuThoat)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnThem)))))
-                .addContainerGap(88, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnThem)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_SieuThoat))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btFillTable)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,29 +189,35 @@ public final class DN extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(tfPassWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfPassWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbbLuuThongTin))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_DangNhap)
-                    .addComponent(btn_SieuThoat)
                     .addComponent(btn_LamMoi)
-                    .addComponent(btnThem))
+                    .addComponent(btnThem)
+                    .addComponent(btn_SieuThoat))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbbSinhVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnShow)
                     .addComponent(lbShowPass))
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(btFillTable)
+                        .addGap(262, 262, 262))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,23 +226,58 @@ public final class DN extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    public void showPass(){
+
+    public void showPass() {
         int viTri = cbbSinhVien.getSelectedIndex();
         String acc = listSV.get(viTri).getPassWord();
         lbShowPass.setText(acc);
     }
+
     public void loadData() {
-        listSV.add(new SinhVien("minh", "123","IT16303"));
-        listSV.add(new SinhVien("111", "123","IT16303"));
-        listSV.add(new SinhVien("222", "123","IT16303"));
-        listSV.add(new SinhVien("333", "123","IT16303"));
+        listSV.add(new SinhVien("minh", "123", "IT16303"));
+        listSV.add(new SinhVien("111", "123", "IT16303"));
+        listSV.add(new SinhVien("222", "123", "IT16303"));
+        listSV.add(new SinhVien("333", "123", "IT16303"));
         //
     }
 
     public void clearForm() {
         tfUserName.setText("");
         tfPassWord.setText("");
+    }
+
+    public boolean checkTrung(String acc){
+        boolean check = false;
+        for(int i =0; i < listSV.size(); i++){
+            if(listSV.get(i).getUserName().equals(acc)){
+                check = true;
+            }
+        }
+        return check;
+    }
+    public void addACC() {
+        String name = tfUserName.getText();
+        String pass = tfPassWord.getText();
+        try {
+            if(checkTrung(name) == true){
+                JOptionPane.showMessageDialog(rootPane, "Trùng mã rồi thánh ơi");
+                return;
+            }
+        } catch (Exception e) {
+        }
+        listSV.add(new SinhVien(name, pass, ""));
+        cbbSinhVien.addItem(name);
+    }
+
+    public void fillTable() {
+
+        DefaultTableModel model = (DefaultTableModel) tbShowAcc.getModel();// lấy model tự tạo từ table
+        model.setRowCount(0);// xóa hết dữ liệu 
+
+        for (SinhVien xxx : listSV) {
+            model.addRow(new Object[]{xxx.getUserName(), xxx.getPassWord()});
+        }
+
     }
 
     public void loginForm() {
@@ -230,9 +317,31 @@ public final class DN extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_DangNhapActionPerformed
 
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
-        // TODO add your handling code here:
+
         showPass();
     }//GEN-LAST:event_btnShowActionPerformed
+
+    private void cbbSinhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbSinhVienActionPerformed
+
+        showPass();
+    }//GEN-LAST:event_cbbSinhVienActionPerformed
+
+    private void cbbSinhVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbSinhVienMouseClicked
+
+//                showPass();
+
+    }//GEN-LAST:event_cbbSinhVienMouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+
+        addACC();
+        fillTable();
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btFillTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFillTableActionPerformed
+
+        fillTable();
+    }//GEN-LAST:event_btFillTableActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,17 +379,21 @@ public final class DN extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btFillTable;
     private javax.swing.JButton btnShow;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btn_DangNhap;
     private javax.swing.JButton btn_LamMoi;
     private javax.swing.JButton btn_SieuThoat;
+    private javax.swing.JCheckBox cbbLuuThongTin;
     private javax.swing.JComboBox<String> cbbSinhVien;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbDangNhap;
     private javax.swing.JLabel lbShowPass;
+    private javax.swing.JTable tbShowAcc;
     private javax.swing.JPasswordField tfPassWord;
     private javax.swing.JTextField tfUserName;
     // End of variables declaration//GEN-END:variables
