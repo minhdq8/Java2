@@ -12,9 +12,10 @@ package Demo3;
 public class LienQuan extends javax.swing.JFrame {
 
     /**
-     * 1. title MinhDQ8_FpolyHN
-     * 2. check trùng acc
-     * 3. checkbox ko bắt buộc
+     * 1. Title MinhDQ8_FpolyHN
+     * 2. Check trùng tên tướng
+     * 3. Clear: xóa trắng, ccb mặc định về đầu tiên
+     * 4. Checkbox ko bắt buộc
      */
     public LienQuan() {
         initComponents();

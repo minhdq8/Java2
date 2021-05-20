@@ -6,7 +6,9 @@
 package Demo2;
 
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,8 +27,10 @@ public class FormLogin extends javax.swing.JFrame {
         setResizable(false);//khóa kích cỡ form lại
         lbShowForm.setText("Trượt java 2 chặt luôn!");
         loadData();
-        for(SinhVien xxx : listSV) cbbUser.addItem(xxx.getUserName());
-        
+        for (SinhVien xxx : listSV) {
+            cbbUser.addItem(xxx.getUserName());
+        }
+
     }
 
     /**
@@ -38,6 +42,8 @@ public class FormLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         lbShowForm = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -51,6 +57,22 @@ public class FormLogin extends javax.swing.JFrame {
         cbbUser = new javax.swing.JComboBox<>();
         btHintPass = new javax.swing.JButton();
         lbHintPass = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbShowAcc = new javax.swing.JTable();
+        btFillTable = new javax.swing.JButton();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FPT Polytechnic");
@@ -77,6 +99,11 @@ public class FormLogin extends javax.swing.JFrame {
         });
 
         btAdd.setText("Add");
+        btAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddActionPerformed(evt);
+            }
+        });
 
         btExit.setText("Exit");
         btExit.addActionListener(new java.awt.event.ActionListener() {
@@ -92,47 +119,74 @@ public class FormLogin extends javax.swing.JFrame {
             }
         });
 
+        tbShowAcc.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "User", "Pass", "Class"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tbShowAcc);
+
+        btFillTable.setText("Fill");
+        btFillTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btFillTableActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUser)
-                            .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btFillTable))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(lbShowForm))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btLogin)
+                        .addGap(18, 18, 18)
+                        .addComponent(btClear)
+                        .addGap(18, 18, 18)
+                        .addComponent(btAdd)
                         .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cbbUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btHintPass)
-                                .addGap(35, 35, 35)
-                                .addComponent(lbHintPass))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btLogin)
-                                .addGap(18, 18, 18)
-                                .addComponent(btClear)
-                                .addGap(18, 18, 18)
-                                .addComponent(btAdd)
-                                .addGap(28, 28, 28)
-                                .addComponent(btExit)))))
-                .addContainerGap(62, Short.MAX_VALUE))
+                        .addComponent(btExit))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(cbbUser, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(8, 8, 8)
+                            .addComponent(btHintPass)
+                            .addGap(34, 34, 34)
+                            .addComponent(lbHintPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(8, 8, 8)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lbShowForm)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtUser)
+                                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(17, 17, 17)
                 .addComponent(lbShowForm, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -142,18 +196,26 @@ public class FormLogin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btLogin)
                     .addComponent(btClear)
                     .addComponent(btAdd)
                     .addComponent(btExit))
-                .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbbUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btHintPass)
-                    .addComponent(lbHintPass))
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbHintPass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbbUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btHintPass)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(btFillTable)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -167,14 +229,19 @@ public class FormLogin extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Phương thức tự tạo
+
+//    public void fillData() {
+//        String[] data = {
+//            "Minh", "Ăn", "Chơi", "Ngủ"
+//        };
+//        cbbUser.setModel(new DefaultComboBoxModel<>(data));
+//    }
 
     public void loadData() {
         listSV.add(new SinhVien("a1", "111", "IT16302"));
@@ -183,21 +250,24 @@ public class FormLogin extends javax.swing.JFrame {
         listSV.add(new SinhVien("a4", "444", "IT16302"));
         listSV.add(new SinhVien("a5", "555", "IT16302"));
     }
-    public void clear(){
+
+    public void clear() {
         txtPass.setText("");
         txtUser.setText("");
     }
-    public void hintPass(){
+
+    public void hintPass() {
         int index = cbbUser.getSelectedIndex();
         lbHintPass.setText(listSV.get(index).getPassWord());
     }
-    public void login(){
+
+    public void login() {
         try {
             for (SinhVien xxx : listSV) {
                 if (txtUser.getText().equalsIgnoreCase(xxx.getUserName())
                         && txtPass.getText().equalsIgnoreCase(xxx.getPassWord())) {
                     JOptionPane.showMessageDialog(this, "Login ok");
-                    return ;
+                    return;
                 }
             }
             if (txtUser.getText().equals("")) {
@@ -210,6 +280,39 @@ public class FormLogin extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Can not connect to DB");
         }
+    }
+
+    public void fillTable() {
+        DefaultTableModel model = (DefaultTableModel) tbShowAcc.getModel();
+        model.setRowCount(0);// xóa hết dữ liệu
+
+        for (SinhVien xxx : listSV) {
+            model.addRow(new Object[]{
+                xxx.getUserName(), xxx.getPassWord(), xxx.getClassMate()
+            });
+        }
+    }
+    public boolean checkTrung(String name){
+        boolean check = false;
+        for(int i = 0; i < listSV.size(); i++){
+            if(listSV.get(i).getUserName().equals(name)){
+                check = true;
+            }
+        }
+        return check;
+    }
+    public void addAcc() {
+        String name = txtUser.getText();
+        String pass = txtPass.getText();
+        try {
+            if(checkTrung(name) == true){
+                JOptionPane.showMessageDialog(rootPane, "Trùng ACC!");
+                return;
+            }
+        } catch (Exception e) {
+        }
+        listSV.add(new SinhVien(name, pass, ""));
+        cbbUser.addItem(name);
     }
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
         // TODO add your handling code here:
@@ -231,6 +334,15 @@ public class FormLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         hintPass();
     }//GEN-LAST:event_btHintPassActionPerformed
+
+    private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
+        addAcc();
+        fillTable();
+    }//GEN-LAST:event_btAddActionPerformed
+
+    private void btFillTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFillTableActionPerformed
+        fillTable();
+    }//GEN-LAST:event_btFillTableActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,14 +383,19 @@ public class FormLogin extends javax.swing.JFrame {
     private javax.swing.JButton btAdd;
     private javax.swing.JButton btClear;
     private javax.swing.JButton btExit;
+    private javax.swing.JButton btFillTable;
     private javax.swing.JButton btHintPass;
     private javax.swing.JButton btLogin;
     private javax.swing.JComboBox<String> cbbUser;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbHintPass;
     private javax.swing.JLabel lbShowForm;
+    private javax.swing.JTable tbShowAcc;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
