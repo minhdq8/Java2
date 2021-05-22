@@ -13,7 +13,15 @@ public class SinhVien {
     private String classMate;
     private String userName;
     private String passWord;
+    private String gioiTinh;
 
+    public SinhVien(String classMate, String userName, String passWord, String gioiTinh) {
+        this.classMate = classMate;
+        this.userName = userName;
+        this.passWord = passWord;
+        this.gioiTinh = gioiTinh;
+    }
+    
     public SinhVien(String userName, String passWord, String classmate) {
         this.userName = userName;
         this.passWord = passWord;
@@ -42,6 +50,14 @@ public class SinhVien {
 
     public void setPassWord(String passWord) {
         this.passWord = passWord;
+    }
+
+    public String getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
     
     

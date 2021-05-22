@@ -27,6 +27,10 @@ public class FormLogin extends javax.swing.JFrame {
         setResizable(false);//khóa kích cỡ form lại
         lbShowForm.setText("Trượt java 2 chặt luôn!");
         loadData();
+        fillTable();
+        cbbUser.removeAllItems();// xóa dữ liệu cữ trên cbb
+        cbLuu.setSelected(true);// mặc định tick checkbox
+        rdNam.setSelected(true);
         for (SinhVien xxx : listSV) {
             cbbUser.addItem(xxx.getUserName());
         }
@@ -44,6 +48,7 @@ public class FormLogin extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         lbShowForm = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -60,6 +65,12 @@ public class FormLogin extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbShowAcc = new javax.swing.JTable();
         btFillTable = new javax.swing.JButton();
+        cbLuu = new javax.swing.JCheckBox();
+        rdNu = new javax.swing.JRadioButton();
+        rdNam = new javax.swing.JRadioButton();
+        btGioiTinh = new javax.swing.JButton();
+        tfShowUser = new javax.swing.JTextField();
+        tfShowPass = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,6 +123,12 @@ public class FormLogin extends javax.swing.JFrame {
             }
         });
 
+        cbbUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbUserActionPerformed(evt);
+            }
+        });
+
         btHintPass.setText("Hint Pass");
         btHintPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,15 +141,20 @@ public class FormLogin extends javax.swing.JFrame {
 
             },
             new String [] {
-                "User", "Pass", "Class"
+                "User", "Pass", "Class", "Gender"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbShowAcc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbShowAccMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tbShowAcc);
@@ -144,78 +166,128 @@ public class FormLogin extends javax.swing.JFrame {
             }
         });
 
+        cbLuu.setText("Lưu");
+
+        buttonGroup1.add(rdNu);
+        rdNu.setText("nữ");
+
+        buttonGroup1.add(rdNam);
+        rdNam.setText("nam");
+
+        btGioiTinh.setText("Giới tính");
+        btGioiTinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGioiTinhActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btFillTable))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cbbUser, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btHintPass))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btLogin)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btClear)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btAdd)
+                                        .addGap(28, 28, 28)
+                                        .addComponent(btExit)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbHintPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbShowForm)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtUser)
+                                        .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbLuu))
+                                .addGap(52, 52, 52)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rdNu)
+                                    .addComponent(rdNam))))
+                        .addGap(29, 29, 29)
+                        .addComponent(btGioiTinh))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btLogin)
-                        .addGap(18, 18, 18)
-                        .addComponent(btClear)
-                        .addGap(18, 18, 18)
-                        .addComponent(btAdd)
                         .addGap(28, 28, 28)
-                        .addComponent(btExit))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(cbbUser, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(8, 8, 8)
-                            .addComponent(btHintPass)
-                            .addGap(34, 34, 34)
-                            .addComponent(lbHintPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(8, 8, 8)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel2))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbShowForm)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtUser)
-                                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(btFillTable)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfShowUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfShowPass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(lbShowForm, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btLogin)
-                    .addComponent(btClear)
-                    .addComponent(btAdd)
-                    .addComponent(btExit))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbHintPass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cbbUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btHintPass)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(lbShowForm, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rdNam)
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rdNu)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(btFillTable)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addGap(120, 120, 120)
+                        .addComponent(btGioiTinh)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbLuu)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btLogin)
+                            .addComponent(btClear)
+                            .addComponent(btAdd)
+                            .addComponent(btExit))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbbUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btHintPass))
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(lbHintPass, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btFillTable)
+                        .addGap(29, 29, 29)
+                        .addComponent(tfShowUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfShowPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(16, 16, 16))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -288,7 +360,7 @@ public class FormLogin extends javax.swing.JFrame {
 
         for (SinhVien xxx : listSV) {
             model.addRow(new Object[]{
-                xxx.getUserName(), xxx.getPassWord(), xxx.getClassMate()
+                xxx.getUserName(), xxx.getPassWord(), xxx.getClassMate(),xxx.getGioiTinh()
             });
         }
     }
@@ -304,6 +376,8 @@ public class FormLogin extends javax.swing.JFrame {
     public void addAcc() {
         String name = txtUser.getText();
         String pass = txtPass.getText();
+        String gender = rdNam.isSelected() ? "Nam": "Nữ";
+        
         try {
             if(checkTrung(name) == true){
                 JOptionPane.showMessageDialog(rootPane, "Trùng ACC!");
@@ -311,7 +385,7 @@ public class FormLogin extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
-        listSV.add(new SinhVien(name, pass, ""));
+        listSV.add(new SinhVien(name, pass, "",gender));
         cbbUser.addItem(name);
     }
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
@@ -323,6 +397,7 @@ public class FormLogin extends javax.swing.JFrame {
     private void btClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearActionPerformed
         // TODO add your handling code here:
         clear();
+        cbbUser.setSelectedIndex(0);//cho cbb về vị trí đầu tiên
     }//GEN-LAST:event_btClearActionPerformed
 
     private void btExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExitActionPerformed
@@ -336,13 +411,45 @@ public class FormLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btHintPassActionPerformed
 
     private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
-        addAcc();
-        fillTable();
+        if(cbLuu.isSelected() == true){
+            addAcc();
+            fillTable();
+        } else{
+            JOptionPane.showMessageDialog(rootPane, "Tick vào checkbox đã!");
+            return;
+        }
     }//GEN-LAST:event_btAddActionPerformed
 
     private void btFillTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFillTableActionPerformed
         fillTable();
     }//GEN-LAST:event_btFillTableActionPerformed
+
+    private void cbbUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbUserActionPerformed
+        hintPass();
+    }//GEN-LAST:event_cbbUserActionPerformed
+
+    private void btGioiTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGioiTinhActionPerformed
+        if(rdNam.isSelected()){
+            JOptionPane.showMessageDialog(rootPane, "Nam hoa hậu");
+        }
+        if(rdNu.isSelected()){
+            JOptionPane.showMessageDialog(rootPane, "Nữ ");
+        }
+        
+    }//GEN-LAST:event_btGioiTinhActionPerformed
+
+    private void tbShowAccMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbShowAccMouseClicked
+        int viTri = tbShowAcc.getSelectedRow();
+//        JOptionPane.showMessageDialog(rootPane, viTri);
+    // c1 từ table
+//        DefaultTableModel model = (DefaultTableModel) tbShowAcc.getModel();
+//        tfShowUser.setText(model.getValueAt(viTri, 0).toString());
+//        tfShowPass.setText(model.getValueAt(viTri, 1).toString());
+        // c2 từ list
+        SinhVien xxx = listSV.get(viTri);
+        tfShowUser.setText(xxx.getUserName());
+        tfShowPass.setText(xxx.getPassWord());
+    }//GEN-LAST:event_tbShowAccMouseClicked
 
     /**
      * @param args the command line arguments
@@ -384,8 +491,11 @@ public class FormLogin extends javax.swing.JFrame {
     private javax.swing.JButton btClear;
     private javax.swing.JButton btExit;
     private javax.swing.JButton btFillTable;
+    private javax.swing.JButton btGioiTinh;
     private javax.swing.JButton btHintPass;
     private javax.swing.JButton btLogin;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JCheckBox cbLuu;
     private javax.swing.JComboBox<String> cbbUser;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -395,7 +505,11 @@ public class FormLogin extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbHintPass;
     private javax.swing.JLabel lbShowForm;
+    private javax.swing.JRadioButton rdNam;
+    private javax.swing.JRadioButton rdNu;
     private javax.swing.JTable tbShowAcc;
+    private javax.swing.JTextField tfShowPass;
+    private javax.swing.JTextField tfShowUser;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
