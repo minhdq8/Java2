@@ -5,7 +5,6 @@
  */
 package Demo3;
 
-import demoFull.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -419,7 +418,6 @@ public class UD1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btThemActionPerformed
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
-        // TODO add your handling code here:
         xoaList();
         addTable();
 
