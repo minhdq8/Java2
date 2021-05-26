@@ -128,11 +128,11 @@ public final class DN extends javax.swing.JFrame {
 
             },
             new String [] {
-                "User", "Pass"
+                "User", "Pass", "Gender"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -286,10 +286,10 @@ public final class DN extends javax.swing.JFrame {
     }
 
     public void loadData() {
-        listSV.add(new SinhVien("minh", "123", "IT16303"));
-        listSV.add(new SinhVien("111", "123", "IT16303"));
-        listSV.add(new SinhVien("222", "123", "IT16303"));
-        listSV.add(new SinhVien("333", "123", "IT16303"));
+        listSV.add(new SinhVien("minh", "123", "IT16303","Nam"));
+        listSV.add(new SinhVien("111", "123", "IT16303","Nam"));
+        listSV.add(new SinhVien("222", "123", "IT16303","Nam"));
+        listSV.add(new SinhVien("333", "123", "IT16303","Nam"));
         //
     }
 
@@ -311,6 +311,7 @@ public final class DN extends javax.swing.JFrame {
     public void addACC() {
         String name = tfUserName.getText();
         String pass = tfPassWord.getText();
+        String gender = rdNam.isSelected() ? "Nam": "Nữ";
         try {
             if (checkTrung(name) == true) {
                 JOptionPane.showMessageDialog(rootPane, "Trùng mã rồi thánh ơi");
@@ -318,7 +319,7 @@ public final class DN extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
-        listSV.add(new SinhVien(name, pass, ""));
+        listSV.add(new SinhVien(name, pass, "java1", gender));
         cbbSinhVien.addItem(name);
     }
 
@@ -328,7 +329,7 @@ public final class DN extends javax.swing.JFrame {
         model.setRowCount(0);// xóa hết dữ liệu 
 
         for (SinhVien xxx : listSV) {
-            model.addRow(new Object[]{xxx.getUserName(), xxx.getPassWord()});
+            model.addRow(new Object[]{xxx.getUserName(), xxx.getPassWord(),xxx.getGioiTinh()});
         }
 
     }
@@ -423,6 +424,11 @@ public final class DN extends javax.swing.JFrame {
         SinhVien xxx = listSV.get(index);
         tfUserName.setText(xxx.getUserName());
         tfPassWord.setText(xxx.getPassWord());
+        if(xxx.getGioiTinh().equalsIgnoreCase("nam")){
+            rdNam.setSelected(true);
+        }else{
+            rdNu.setSelected(true);
+        }
     }//GEN-LAST:event_tbShowAccMouseClicked
 
     /**
