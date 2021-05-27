@@ -398,13 +398,10 @@ public class UD1 extends javax.swing.JFrame {
 
     private void tblSinhvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSinhvienMouseClicked
         int row = tblSinhvien.getSelectedRow();
-
         if (row >= 0) {
             vitri = row;
             display(vitri);
         }
-
-
     }//GEN-LAST:event_tblSinhvienMouseClicked
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
@@ -424,7 +421,6 @@ public class UD1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btXoaActionPerformed
 
     private void btCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapNhatActionPerformed
-
         capNhat();
     }//GEN-LAST:event_btCapNhatActionPerformed
 
@@ -434,7 +430,7 @@ public class UD1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btSXTenActionPerformed
 
     private void btSXDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSXDiemActionPerformed
-        Collections.sort(listSV ,(a,b) -> (int)(a.getDiem() - b.getDiem()) );
+        Collections.sort(listSV ,(a,b) -> (int)(a.getDiem() - b.getDiem()) ); 
         addTable();
     }//GEN-LAST:event_btSXDiemActionPerformed
 
