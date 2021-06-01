@@ -10,7 +10,7 @@ package Demo4;
  * @author minhdq
  */
 public class tryCatch {
-    public static void main01(String args[]) {
+    public static void main12(String args[]) {
         int data = 50 / 0;  // ném ra ngoại lê ở đây
         System.out.println(data);
         System.out.println("Lỗi rồi in ra đc ko ?...");
@@ -25,7 +25,7 @@ public class tryCatch {
     public static void main11(String[] args) {
         try {
             int data = 50 / 0;
-        } catch (ArithmeticException e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
         System.out.println("Lỗi rồi in ra đc ko ?...");
@@ -53,6 +53,7 @@ public class tryCatch {
             System.out.println("Task2 duoc hoan thanh");
         }
         catch(Exception e){
+            System.out.println(e);
             System.out.println("Task chung duoc hoan thanh");
         }
         System.out.println("Phan code con lai...");  

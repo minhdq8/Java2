@@ -17,12 +17,12 @@ public class throwAndThrows {
         System.out.print("Mời bạn nhập tuổi:");
         int a = Integer.parseInt(sc.nextLine());
         
-//        validateThrow(a);
-        validateThrow2(a);
+        validateThrow(a);
+//        validateThrow2(a);
     }
     
     static void validateThrow(int age) {
-        if (age < 18)
+        if (age <= 18)
             throw new ArithmeticException("Nhóc con ;))");
         else
             System.out.println("Ahihi 18+");

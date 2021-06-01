@@ -554,17 +554,14 @@ public class UD1 extends javax.swing.JFrame {
     }
 
     private void addTable() {
-
         model.setRowCount(0);//xoa toan bo du lieu cua Model
         for (SinhVien x : listSV) {
             model.addRow(new Object[]{x.getMasv(), x.getHoten(), x.getDiem(), x.getKyNang()});
         }
         if (model.getRowCount() > 0) {//Table co du lieu
-            tblSinhvien.setRowSelectionInterval(0, 0);//Cho Table chon dong dau tien
+            tblSinhvien.setRowSelectionInterval(0,0);//Cho Table chon dong dau tien
         }
-
     }
-
     private void clearForm() {
         tfMasv.setText("");
         tfHoten.setText("");
@@ -573,7 +570,6 @@ public class UD1 extends javax.swing.JFrame {
         vitri = -1;
         lblHienTai.setText("...");
     }
-
     public boolean checkMSSV(String a) {
         boolean check = false;
         for (int i = 0; i < listSV.size(); i++) {
@@ -617,15 +613,19 @@ public class UD1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Lỗi" + e);
         }
         try {
+            Double.parseDouble(tfDiem.getText());
+                   
             if (tfDiem.getText().length() == 0) {
                 JOptionPane.showMessageDialog(this, "Điểm không được để trống");
                 return;
             } else {
                 sv.setDiem(Double.parseDouble(tfDiem.getText()));// lấy dữ liệu tại text-> gán cho sv
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi" + e);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane, "Điểm phải là số");
+            return;
         }
+        
         String kyNang = (String) cbbKyNang.getSelectedItem();
         sv.setKyNang(kyNang);
 

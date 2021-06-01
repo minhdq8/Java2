@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package demoFull;
+package Demo5;
 
+import java.io.Serializable;
 
 /**
  *
  * @author Fpoly
  */
-public class SinhVien {
+public class SinhVien implements Serializable{
 
     private String masv, hoten, kyNang;
     private double diem;

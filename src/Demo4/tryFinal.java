@@ -31,7 +31,7 @@ public class tryFinal {
             System.out.print("Mời bạn nhập 1 số:");
             int a = Integer.parseInt(sc.nextLine());
             System.out.println("Số bạn vừa nhập:"+a);
-        } 
+        }
         catch(NumberFormatException e1){
             System.out.println("Bạn vừa nhập không phải là số");
         }

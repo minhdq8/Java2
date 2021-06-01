@@ -76,7 +76,7 @@ public class demo extends javax.swing.JFrame {
             formDate.applyPattern("dd-mm-yyyy");
             Date date = formDate.parse(dateInput);
 
-            JOptionPane.showMessageDialog(this, "tháng ngày cô đơn");
+            JOptionPane.showMessageDialog(rootPane, "tháng ngày cô đơn");
             
             formDate.applyPattern("EEE, dd MMMM, yyyy");
             String input2 = formDate.format(date);
