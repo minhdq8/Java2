@@ -17,27 +17,28 @@ import java.io.ObjectOutputStream;
  * @author minhdq
  */
 public class IOData {
+
     public static Object readOb(String path) {
         try {
             FileInputStream fis = new FileInputStream(path);
-            Object object;
-            try (ObjectInputStream ois = new ObjectInputStream(fis)) {
-                object = ois.readObject();
-                ois.close();
-            }
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Object object = ois.readObject();
+            ois.close();
+
             return object;
         } catch (IOException | ClassNotFoundException e) {
         }
         return null;
     }
+
     public static void writeOb(String path, Object obj) {
         try {
             FileOutputStream fos = new FileOutputStream(path);
-            try (ObjectOutput oos = new ObjectOutputStream(fos)) {
-                oos.writeObject(obj);
-                oos.close();
-            }
-        } catch (IOException e) {
+            ObjectOutput oos = new ObjectOutputStream(fos);
+            oos.writeObject(obj);
+            oos.close();
+
+        } catch (Exception e) {
         }
 
     }

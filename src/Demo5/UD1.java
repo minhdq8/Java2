@@ -23,14 +23,14 @@ public class UD1 extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         model = (DefaultTableModel) tblSinhvien.getModel();
 
-//        listSV.add(new SinhVien("PH01001", "Minh", "Code", 10));
-//        listSV.add(new SinhVien("PH01002", "Khanh An", "Code", 10));
-//        listSV.add(new SinhVien("PH01005", "Quang Duc", "Code", 10));
+        listSV.add(new SinhVien("PH01001", "Minh", "Code", 10));
+        listSV.add(new SinhVien("PH01002", "Khanh An", "Code", 10));
+        listSV.add(new SinhVien("PH01005", "Quang Duc", "Code", 10));
 //        addTable();
-//        if (listSV.size() >= 1) {
-//            vitri = 0;
-//            display(vitri);
-//        }
+        if (listSV.size() >= 1) {
+            vitri = (listSV.size() - 1);
+            display(vitri);
+        }
     }
 
     /**
@@ -536,15 +536,13 @@ public class UD1 extends javax.swing.JFrame {
             vitri = row;
             display(vitri);
         }
-
-
     }//GEN-LAST:event_tblSinhvienMouseClicked
     public void openFile() {
-        File file = new File("1530BBB.txt");
-        listSV = (List<SinhVien>) IOData.readOb("1530BBB.txt");
+//        File file = new File("16303IT.txt");
+        listSV = (List<SinhVien>) IOData.readOb("16303IT_UD.dat");
     }
     public void saveFile() {
-        IOData.writeOb("1530BBB.txt", listSV);
+        IOData.writeOb("16303IT_UD.dat", listSV);
     }
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         clearForm();
