@@ -11,7 +11,7 @@ package j2demo6;
  */
 public class Multi extends Thread{
      @Override
-     public void run() {
+     public  void run() {
          for (int i = 0; i < 10; i++) {
              System.out.printf("thread is running... %d\n" , i);
              try {

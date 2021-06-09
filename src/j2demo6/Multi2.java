@@ -12,16 +12,22 @@ package j2demo6;
 public class Multi2 implements Runnable {
 
     @Override
-    public void run() {
-        System.out.println("thread is running...");
+    public  void run() {
+        for (int i = 0; i < 10; i++) {
+             System.out.printf("thread is running... %d\n" , i);
+             try {
+                 Thread.sleep(1000);
+             } catch (Exception e) {
+             }
+         }
     }
 
     public static void main(String args[]) {
         Multi2 m1 = new Multi2();
         Thread t1 = new Thread(m1);
+//        Thread t2 = new Thread(m1);
         t1.start();
-        Thread t2 = new Thread(new Multi2());
-        t2.start();
+//        t2.start();
 
     }
 }

@@ -80,7 +80,6 @@ public class FormCount extends javax.swing.JFrame {
         //Thread nặc danh
 //        new Runnable(){
 //        public void run(){}
-/*
         Thread t1 = new Thread() {
             @Override
             public void run() {
@@ -97,23 +96,22 @@ public class FormCount extends javax.swing.JFrame {
         };
         t1.start();
         btCount.setEnabled(false);
-*/
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; true; i++) {
-                    btCount.setText(i + "");
-                    try {
-                        Thread.sleep(100);
-                    } catch (Exception e) {
-                        break;
-                    }
-                }
-            }
-
-        }).start();
-        btCount.setEnabled(false);
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                for (int i = 0; true; i++) {
+//                    btCount.setText(i + "");
+//                    try {
+//                        Thread.sleep(100);
+//                    } catch (Exception e) {
+//                        break;
+//                    }
+//                }
+//            }
+//
+//        }).start();
+//        btCount.setEnabled(false);
     }//GEN-LAST:event_btCountActionPerformed
 
     private void btStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btStopActionPerformed
