@@ -31,6 +31,7 @@ public class UD1 extends javax.swing.JFrame {
             vitri = (listSV.size() - 1);
             display(vitri);
         }
+        
     }
 
     /**

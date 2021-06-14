@@ -1,0 +1,21 @@
+1. Kiểu đối tượng an toàn: Chúng ta chỉ có thể lưu một kiểu đối tượng duy nhất trong generics.
+ Nó không cho phép lưu trữ 2 đối tượng có kiểu khác nhau.
+
+2. Không cần phải ép kiểu:
+
+Trước Generics chúng ta cần phải ép kiểu, ví dụ:
+
+List list = new ArrayList();
+list.add("hello");
+String s = (String) list.get(0);// ép kiểu
+Sau Generics chúng ta không cần phải ép kiểu đối tượng, ví dụ:
+
+List<String> list = new ArrayList<String>();
+list.add("hello");
+String s = list.get(0);
+3. Kiểm tra lúc biên dịch: nó kiểm tra lỗi khi biên dịch nên sẽ không bị lỗi lúc runtime.
+
+
+List<String> list = new ArrayList<String>();
+list.add("hello");
+list.add(32);// Compile Time Error
